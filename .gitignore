@@ -1,6 +1,5 @@
 HELP.md
 target/
-.mvn
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -19,7 +18,5 @@ target/
 *.iml
 *.ipr
 
-mvnw
-mvnw.cmd
 wro_hr.iml
 
