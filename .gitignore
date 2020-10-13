@@ -19,7 +19,7 @@ target/
 *.iml
 *.ipr
 
-.mvnw
+mvnw
 mvnw.cmd
 wro_hr.iml
 
