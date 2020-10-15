@@ -23,12 +23,12 @@ public class Employer extends BaseEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<EmployeeEmployer> employees = new ArrayList<>();
+    private List<EmployerEmployee> employees = new ArrayList<>();
 
-    public void addEmployee(Employee employee, JobTitle jobTitle, LocalDate contractSignDate, LocalDate contractStartDate, LocalDate contractExpirationDate, LocalDate contractEndDate) {
-        EmployeeEmployer employeeEmployer = new EmployeeEmployer(employee, this, jobTitle, contractSignDate, contractStartDate, contractExpirationDate, contractEndDate);
-        employees.add(employeeEmployer);
-        jobTitle.addEmployeeEmployer(employeeEmployer);
-        employee.getEmployers().add(employeeEmployer);
+    public void addEmployee(Employee employee, JobTitle jobTitle, LocalDate signDate, LocalDate startDate, LocalDate expirationDate, LocalDate endDate) {
+        EmployerEmployee employerEmployee = new EmployerEmployee(employee, this, jobTitle, signDate, startDate, expirationDate, endDate);
+        employees.add(employerEmployee);
+        jobTitle.addEmployeeEmployer(employerEmployee);
+        employee.getEmployers().add(employerEmployee);
     }
 }

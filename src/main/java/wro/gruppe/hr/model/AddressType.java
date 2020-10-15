@@ -22,14 +22,14 @@ public class AddressType extends BaseEntity{
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<AddressEmployee> addressEmployee = new ArrayList<>();
+    private List<EmployeeAddress> employeeAddress = new ArrayList<>();
 
-    public void addAddressEmployee(AddressEmployee addressEmployee) {
-        this.addressEmployee.add(addressEmployee);
-        addressEmployee.setAddressType(this);
+    public void addAddressEmployee(EmployeeAddress employeeAddress) {
+        this.employeeAddress.add(employeeAddress);
+        employeeAddress.setAddressType(this);
     }
-    public void removeAddressEmployee(AddressEmployee addressEmployee) {
-        this.addressEmployee.remove(addressEmployee);
-        addressEmployee.setAddressType(null);
+    public void removeAddressEmployee(EmployeeAddress employeeAddress) {
+        this.employeeAddress.remove(employeeAddress);
+        employeeAddress.setAddressType(null);
     }
 }

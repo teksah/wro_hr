@@ -17,7 +17,6 @@ import java.util.List;
 public class Employee extends BaseEntity {
 
     private String uniqueName;
-
     private String firstName;
     private String secondName;
     private String lastName;
@@ -25,10 +24,10 @@ public class Employee extends BaseEntity {
     private LocalDate birthDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Citizenship citizenship;
+    private Gender gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Gender gender;
+    private Citizenship citizenship;
 
     @OneToMany(
             mappedBy = "employee",
@@ -65,14 +64,19 @@ public class Employee extends BaseEntity {
             orphanRemoval = true
     )
     private List<Qualification> qualifications = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "employee",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Language> languages = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "employee",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<AddressEmployee> addresses = new ArrayList<>();
-
+    private List<EmployeeAddress> addresses = new ArrayList<>();
     private String phoneNumber;
     private String email;
 
@@ -81,7 +85,8 @@ public class Employee extends BaseEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<EmployeeEmployer> employers = new ArrayList<>();
+    private List<EmployerEmployee> employers = new ArrayList<>();
+
 
     @PrePersist
     void prePersist() {
@@ -124,10 +129,21 @@ public class Employee extends BaseEntity {
         qualification.setEmployee(null);
     }
 
-    private void addAddress(Address address, AddressType addressType) {
-        AddressEmployee addressEmployee = new AddressEmployee(address, this, addressType);
-        addresses.add(addressEmployee);
-        address.getEmployees().add(addressEmployee);
+    public void addAddress(Address address, AddressType addressType) {
+        EmployeeAddress employeeAddress = new EmployeeAddress(address, this, addressType);
+        addresses.add(employeeAddress);
+        addressType.addAddressEmployee(employeeAddress);
+        address.getEmployees().add(employeeAddress);
     }
+
+    public void addLanguage(Language language) {
+        this.languages.add(language);
+        language.setEmployee(this);
+    }
+    public void removeLanguage(Language language) {
+        this.languages.remove(language);
+        language.setEmployee(null);
+    }
+
 
 }

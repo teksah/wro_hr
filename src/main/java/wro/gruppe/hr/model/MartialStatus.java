@@ -28,7 +28,6 @@ public class MartialStatus extends BaseEntity {
         this.employees.add(employee);
         employee.setMartialStatus(this);
     }
-
     private void removeEmployee(Employee employee) {
         this.employees.remove(employee);
         employee.setMartialStatus(null);

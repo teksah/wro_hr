@@ -38,7 +38,7 @@ public class Address extends BaseEntity{
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<AddressEmployee> employees = new ArrayList<>();
+    private List<EmployeeAddress> employees = new ArrayList<>();
 
 
 

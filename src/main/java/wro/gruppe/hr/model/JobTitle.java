@@ -22,15 +22,15 @@ public class JobTitle extends BaseEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<EmployeeEmployer> employeeEmployer = new ArrayList<>();
+    private List<EmployerEmployee> employerEmployee = new ArrayList<>();
 
-    public void addEmployeeEmployer(EmployeeEmployer employeeEmployer) {
-        this.employeeEmployer.add(employeeEmployer);
-        employeeEmployer.setJobTitle(this);
+    public void addEmployeeEmployer(EmployerEmployee employerEmployee) {
+        this.employerEmployee.add(employerEmployee);
+        employerEmployee.setJobTitle(this);
     }
-    public void removeEmployeeEmployer(EmployeeEmployer employeeEmployer) {
-        this.employeeEmployer.remove(employeeEmployer);
-        employeeEmployer.setJobTitle(null);
+    public void removeEmployeeEmployer(EmployerEmployee employerEmployee) {
+        this.employerEmployee.remove(employerEmployee);
+        employerEmployee.setJobTitle(null);
     }
 
 }

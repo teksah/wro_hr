@@ -7,24 +7,19 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
-public class IdentityCard extends BaseEntity {
+public class Language extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private IdentityCardType identityCardType;
+    private LanguageName languageName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private LanguageLevel languageLevel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
-
-    private String cardNumber;
-    private String issuingAuthority;
-
-    private LocalDate issueDate;
-    private LocalDate expiryDate;
-
 }
