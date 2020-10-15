@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class EmployeeEmployer {
 
     @EmbeddedId
-    private EmployeeEmployerId id;
+    private EmployeeEmployerId employeeEmployerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("employeeId")
@@ -30,13 +30,15 @@ public class EmployeeEmployer {
     private LocalDate contractSignDate;
     private LocalDate contractStartDate;
     private LocalDate contractExpirationDate;
+    private LocalDate contractEndDate;
 
-    public EmployeeEmployer(Employee employee, Employer employer, JobTitle jobTitle, LocalDate contractSignDate, LocalDate contractStartDate, LocalDate contractExpirationDate) {
+    public EmployeeEmployer(Employee employee, Employer employer, JobTitle jobTitle, LocalDate contractSignDate, LocalDate contractStartDate, LocalDate contractExpirationDate, LocalDate contractEndDate) {
         this.employee = employee;
         this.employer = employer;
         this.jobTitle = jobTitle;
         this.contractSignDate = contractSignDate;
         this.contractStartDate = contractStartDate;
         this.contractExpirationDate = contractExpirationDate;
+        this.contractEndDate = contractEndDate;
     }
 }

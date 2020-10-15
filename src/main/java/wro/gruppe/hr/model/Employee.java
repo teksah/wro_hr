@@ -17,6 +17,7 @@ import java.util.List;
 public class Employee extends BaseEntity {
 
     private String uniqueName;
+
     private String firstName;
     private String secondName;
     private String lastName;
@@ -35,14 +36,6 @@ public class Employee extends BaseEntity {
             orphanRemoval = true
     )
     private List<IdentityCard> identityCards = new ArrayList<>();
-    public void addIdentityCard(IdentityCard identityCard) {
-        this.identityCards.add(identityCard);
-        identityCard.setEmployee(this);
-    }
-    public void removeIdentityCard(IdentityCard identityCard) {
-        this.identityCards.remove(identityCard);
-        identityCard.setEmployee(null);
-    }
 
     private String fatherName;
     private String motherName;
@@ -60,44 +53,28 @@ public class Employee extends BaseEntity {
             orphanRemoval = true
     )
     private List<BankAccount> bankAccounts = new ArrayList<>();
-    public void addBankAccount(BankAccount bankAccount) {
-        this.bankAccounts.add(bankAccount);
-        bankAccount.setEmployee(this);
-    }
-    public void removeBankAccount(BankAccount bankAccount) {
-        this.bankAccounts.remove(bankAccount);
-        bankAccount.setEmployee(null);
-    }
-
     @OneToMany(
             mappedBy = "employee",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<MedicalExamination> medicalExaminations = new ArrayList<>();
-    public void addMedicalExamination(MedicalExamination medicalExamination) {
-        this.medicalExaminations.add(medicalExamination);
-        medicalExamination.setEmployee(this);
-    }
-    public void removeMedicalExamination(MedicalExamination medicalExamination) {
-        this.medicalExaminations.remove(medicalExamination);
-        medicalExamination.setEmployee(null);
-    }
-
     @OneToMany(
             mappedBy = "employee",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<Qualification> qualifications = new ArrayList<>();
-    public void addQualification(Qualification qualification) {
-        this.qualifications.add(qualification);
-        qualification.setEmployee(this);
-    }
-    public void removeQualification(Qualification qualification) {
-        this.qualifications.remove(qualification);
-        qualification.setEmployee(null);
-    }
+
+    @OneToMany(
+            mappedBy = "employee",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<AddressEmployee> addresses = new ArrayList<>();
+
+    private String phoneNumber;
+    private String email;
 
     @OneToMany(
             mappedBy = "employee",
@@ -110,4 +87,47 @@ public class Employee extends BaseEntity {
     void prePersist() {
         this.uniqueName = this.firstName + '_' + this.lastName.substring(0,2) + '_' + String.valueOf(birthDate.getYear()).substring(2,4);
     }
+
+    public void addIdentityCard(IdentityCard identityCard) {
+        this.identityCards.add(identityCard);
+        identityCard.setEmployee(this);
+    }
+    public void removeIdentityCard(IdentityCard identityCard) {
+        this.identityCards.remove(identityCard);
+        identityCard.setEmployee(null);
+    }
+
+    public void addBankAccount(BankAccount bankAccount) {
+        this.bankAccounts.add(bankAccount);
+        bankAccount.setEmployee(this);
+    }
+    public void removeBankAccount(BankAccount bankAccount) {
+        this.bankAccounts.remove(bankAccount);
+        bankAccount.setEmployee(null);
+    }
+
+    public void addMedicalExamination(MedicalExamination medicalExamination) {
+        this.medicalExaminations.add(medicalExamination);
+        medicalExamination.setEmployee(this);
+    }
+    public void removeMedicalExamination(MedicalExamination medicalExamination) {
+        this.medicalExaminations.remove(medicalExamination);
+        medicalExamination.setEmployee(null);
+    }
+
+    public void addQualification(Qualification qualification) {
+        this.qualifications.add(qualification);
+        qualification.setEmployee(this);
+    }
+    public void removeQualification(Qualification qualification) {
+        this.qualifications.remove(qualification);
+        qualification.setEmployee(null);
+    }
+
+    private void addAddress(Address address, AddressType addressType) {
+        AddressEmployee addressEmployee = new AddressEmployee(address, this, addressType);
+        addresses.add(addressEmployee);
+        address.getEmployees().add(addressEmployee);
+    }
+
 }

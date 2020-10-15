@@ -29,7 +29,6 @@ public class Citizenship extends BaseEntity {
         this.employees.add(employee);
         employee.setCitizenship(this);
     }
-
     public void removeEmployee(Employee employee) {
         this.employees.remove(employee);
         employee.setCitizenship(this);

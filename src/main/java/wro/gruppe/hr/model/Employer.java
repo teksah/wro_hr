@@ -18,7 +18,6 @@ import java.util.List;
 public class Employer extends BaseEntity {
     private String companyName;
 
-
     @OneToMany(
             mappedBy = "employer",
             cascade = CascadeType.ALL,
@@ -26,9 +25,10 @@ public class Employer extends BaseEntity {
     )
     private List<EmployeeEmployer> employees = new ArrayList<>();
 
-    public void addEmployee(Employee employee, LocalDate sign, LocalDate start, LocalDate expiration, JobTitle jobTitle) {
-        EmployeeEmployer employeeEmployer = new EmployeeEmployer(employee, this, jobTitle, sign, start, expiration);
+    public void addEmployee(Employee employee, JobTitle jobTitle, LocalDate contractSignDate, LocalDate contractStartDate, LocalDate contractExpirationDate, LocalDate contractEndDate) {
+        EmployeeEmployer employeeEmployer = new EmployeeEmployer(employee, this, jobTitle, contractSignDate, contractStartDate, contractExpirationDate, contractEndDate);
         employees.add(employeeEmployer);
+        jobTitle.addEmployeeEmployer(employeeEmployer);
         employee.getEmployers().add(employeeEmployer);
     }
 }

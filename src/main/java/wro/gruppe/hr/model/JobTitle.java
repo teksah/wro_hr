@@ -28,7 +28,6 @@ public class JobTitle extends BaseEntity {
         this.employeeEmployer.add(employeeEmployer);
         employeeEmployer.setJobTitle(this);
     }
-
     public void removeEmployeeEmployer(EmployeeEmployer employeeEmployer) {
         this.employeeEmployer.remove(employeeEmployer);
         employeeEmployer.setJobTitle(null);

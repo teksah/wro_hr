@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @Getter
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
