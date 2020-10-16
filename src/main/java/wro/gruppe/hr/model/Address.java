@@ -39,7 +39,4 @@ public class Address extends BaseEntity{
             orphanRemoval = true
     )
     private List<EmployeeAddress> employees = new ArrayList<>();
-
-
-
 }

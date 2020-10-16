@@ -17,6 +17,7 @@ import java.util.List;
 public class Employee extends BaseEntity {
 
     private String uniqueName;
+
     private String firstName;
     private String secondName;
     private String lastName;
@@ -86,6 +87,8 @@ public class Employee extends BaseEntity {
             orphanRemoval = true
     )
     private List<EmployerEmployee> employers = new ArrayList<>();
+
+
 
 
     @PrePersist
